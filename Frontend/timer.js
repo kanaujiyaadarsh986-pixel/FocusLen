@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://focuslen.onrender.com";
 
 let time = 0; // total seconds
 let timerInterval = null;
