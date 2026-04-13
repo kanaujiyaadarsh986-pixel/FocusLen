@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FocusLens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+<div class="bg"></div>
+
+ 
+
+<div class="container">
+  <nav class="nav">
+
+  <h1 class = "name">Focus<span class="lens">Lens</span></h1>
+</nav> 
+
+
+  <!-- 3D Transparent Cube START -->
+<div class="scene">
+  <div class="cube">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+<!-- 3D Transparent Cube END -->
+
+
+  <p class="tell">Stay focused. We'll analyze your performance.</p>
+
+  <h2 id="timer">00:00:00</h2>
+
+
+  <class class="btn">
+
+  <button id="startBtn">Start</button>
+  <button id="pauseBtn">Pause</button>
+  <button id="resetBtn">Reset</button>
+</class>
+  <br><br>
+
+<a href="dashboard.html" class="dashboard-link">Go to Dashboard →</a>
+
+</div>
+
+
+<!-- Neon Particles -->
+<div class="particles"></div>
+
+<audio id="focusAudio" loop>
+  <source src="audio/focus.mp3" type="audio/mpeg">
+</audio>
+
+<script src="timer.js"></script>
+<script src="particle.js"></script>
+</body>
+</html>

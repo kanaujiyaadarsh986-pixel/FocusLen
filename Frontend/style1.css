@@ -1,0 +1,405 @@
+/* =========================
+   3D Cube Container (Scene)
+   ========================= */
+/* Make cube behave like a normal element (no overlap) */
+.scene {
+  width: 150px;
+  height: 150px;
+
+  margin: 70px auto; /* center horizontally + spacing */
+
+  perspective: 600px;
+}
+/* =========================
+   Cube Base
+   ========================= */
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d; /* IMPORTANT for 3D */
+  
+  /* Tilt cube at 45 degrees */
+  transform: rotateX(45deg) rotateY(45deg);
+
+  /* Optional rotation animation */
+  animation: spin 8s infinite linear;
+}
+
+/* =========================
+   Cube Faces (all 6 sides)
+   ========================= */
+.face {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+
+  /* Transparent look */
+  background: rgba(0, 255, 255, 0.15); /* low opacity */
+  border: 1px solid rgba(0, 255, 255, 0.6);
+}
+
+/* =========================
+   Position each face in 3D
+   ========================= */
+.front  { transform: translateZ(75px); }
+.back   { transform: rotateY(180deg) translateZ(75px); }
+.right  { transform: rotateY(90deg) translateZ(75px); }
+.left   { transform: rotateY(-90deg) translateZ(75px); }
+.top    { transform: rotateX(90deg) translateZ(75px); }
+.bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+/* =========================
+   Animation (optional)
+   ========================= */
+@keyframes spin {
+  from {
+    transform: rotateX(45deg) rotateY(45deg);
+  }
+  to {
+    transform: rotateX(405deg) rotateY(405deg);
+  }
+}
+.face {
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.8);
+
+  /* APPLY animation */
+  animation: neonPulse 2s infinite ease-in-out;
+}
+
+/* Neon pulsing glow animation */
+@keyframes neonPulse {
+  0% {
+    box-shadow:
+      0 0 8px rgba(0, 255, 255, 0.5),
+      0 0 16px rgba(0, 255, 255, 0.4),
+      0 0 24px rgba(0, 255, 255, 0.3);
+  }
+
+  50% {
+    box-shadow:
+      0 0 20px rgba(0, 255, 255, 1),
+      0 0 40px rgba(0, 255, 255, 0.8),
+      0 0 60px rgba(0, 255, 255, 0.6);
+  }
+
+  100% {
+    box-shadow:
+      0 0 8px rgba(0, 255, 255, 0.5),
+      0 0 16px rgba(0, 255, 255, 0.4),
+      0 0 24px rgba(0, 255, 255, 0.3);
+  }
+}
+
+#startBtn, #pauseBtn, #resetBtn {
+  padding: 12px 20px;               /* bigger size */
+  font-size: 16px;
+
+  background: rgba(0, 255, 255, 0.1); /* neon base */
+  color: white;
+  border: 1px solid cyan;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+  margin: 5px; /* spacing between buttons */
+}
+
+#startBtn:hover, #pauseBtn:hover, #resetBtn:hover {
+  transform: scale(1.08);
+
+  background: rgba(0, 255, 255, 0.3);
+
+  box-shadow:
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;
+}
+
+
+.nav{
+    width: 100%;
+    height: auto;
+    margin:10px;
+    
+}
+
+/* =========================
+   Soft Mesh Gradient Background
+   ========================= */
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  background: #0a0a0a; /* base dark */
+
+  overflow: hidden;
+}
+
+/* =========================
+   Soft Floating Blobs
+   ========================= */
+.bg::before,
+.bg::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  /* soft colors (NOT neon) */
+  background: radial-gradient(circle, rgba(100, 100, 255, 0.15), transparent 70%);
+
+  filter: blur(100px);
+  animation: float 20s ease-in-out infinite;
+}
+
+/* second blob */
+.bg::after {
+  background: radial-gradient(circle, rgba(255, 100, 150, 0.12), transparent 70%);
+  animation-duration: 25s;
+}
+
+/* =========================
+   Animation
+   ========================= */
+@keyframes float {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  50% {
+    transform: translate(30%, 20%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+
+
+/* Container */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* no blocking clicks */
+  z-index: -1;
+}
+
+/* Each particle */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: cyan;
+
+  box-shadow:
+    0 0 6px cyan,
+    0 0 12px cyan;
+
+  opacity: 0;
+
+  animation: floatUp 4s linear forwards;
+}
+
+/* Animation */
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1);
+  }
+}
+
+.lens {
+  color: #00aaff;
+
+  text-shadow:
+    0 0 4px rgba(0, 170, 255, 0.5),
+    0 0 8px rgba(0, 170, 255, 0.3),
+    0 0 12px rgba(0, 170, 255, 0.15);
+}
+
+/* Base style */
+.dashboard-link {
+  text-decoration: none;
+
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+
+  color: white;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* animated side glow */
+  animation: sideGlow 2.5s ease-in-out infinite;
+}
+/* Animation for side glow */
+@keyframes sideGlow {
+  0% {
+    box-shadow:
+      -4px 0 6px rgba(0, 170, 255, 0.08),
+       4px 0 6px rgba(0, 170, 255, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      -6px 0 10px rgba(0, 170, 255, 0.15),
+       6px 0 10px rgba(0, 170, 255, 0.15);
+  }
+
+  100% {
+    box-shadow:
+      -4px 0 6px rgba(0, 170, 255, 0.08),
+       4px 0 6px rgba(0, 170, 255, 0.08);
+  }
+}
+/* Hover effect */
+.dashboard-link:hover {
+  transform: translateY(-2px);
+
+  background: rgba(0, 170, 255, 0.15);
+
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
+}
+
+.tell{
+    font-weight: 600;
+    color: white;
+}
+.glass-box {
+  margin: 20px auto;
+  padding: 20px;
+  height: 80%;
+
+  width: 90%;
+  max-width: 1500px;   /* controls max size */
+  min-height: 400px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+  /* layout */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+
+  align-items: start; /* 🔥 prevents stretching */
+  
+}
+
+
+
+
+
+.container1 {
+  width: 100%;
+  max-width: none;   /* 🔥 removes restriction */
+  padding: 0; 
+  
+  text-align: center;
+  
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 6rem;
+}
+
+
+#studyChart{
+  max-height: 200px;
+  
+}
+canvas{
+  border: 2px solid cyan ;
+  animation: sideGlow 2.5s ease-in-out infinite;
+}
+
+.glass-box {
+  align-items: center; /* 🔥 THIS FIXES VERTICAL CENTERING */
+}
+
+
+
+.glass-box {
+  min-height: 350px;
+}
+
+#back_to_timer{
+  text-decoration: none;
+
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+
+  color: white;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  align-self: center;
+
+  /* animated side glow */
+  animation: sideGlow 2.5s ease-in-out infinite;
+}
+
+#back_to_timer:hover {
+  transform: translateY(-2px);
+
+  background: rgba(0, 170, 255, 0.15);
+
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0px);
+    box-shadow:
+      0 0 8px rgba(0, 255, 255, 0.35),
+      0 0 18px rgba(0, 255, 255, 0.2);
+      transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+    box-shadow:
+      0 0 12px rgba(0, 255, 255, 0.45),
+      0 0 24px rgba(0, 255, 255, 0.25);
+      transform: translateY(-6px);
+  }
+}
+
+.glass-box {
+  animation: floatGlow 4s ease-in-out infinite;
+}
+
+

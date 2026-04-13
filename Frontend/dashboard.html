@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FocusLens Dashboard</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
+
+  <style>
+ 
+
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="bg"></div>
+<div class="container1">
+  <h1 class="name">Focus<span class="lens">Lens</span></h1>
+  <p class="tagline" style="color: white; font-weight: 600;font-size: 24px;">Study Behavior Metric</p>
+
+
+
+  <div class="glass-box">
+  <!-- Stats -->
+  <div class="card">
+    <p id="totalTime" style="color: white;">Total Time: </p>
+    <p id="sessionCount" style="color: white;">Sessions: </p>
+    <p id="streak" style="color: white;">Streak: </p>
+  </div>
+
+  <!-- Chart -->
+ <div class="card">
+  <h3 style="color: white;" >Focus Analytics</h3>
+
+  <div class="chart-container">
+    <canvas id="studyChart"></canvas>
+  </div>
+</div>
+
+  <!-- Insights -->
+  <div class="card">
+    <h3 style="color: white;">Performance Insights</h3>
+    <ul id="insightsList"></ul>
+  </div>
+
+</div>
+
+  <br>
+  <a href="index.html" id="back_to_timer">← Back to Timer</a>
+</div>
+<div class="particles"></div>
+
+
+<script src="dashboard.js"></script>
+<script src="particle.js"></script>
+</body>
+</html>
